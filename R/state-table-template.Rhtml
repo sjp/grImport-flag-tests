@@ -22,7 +22,7 @@
             <li>Once the source images have been converted, they are now available for rendering via grImport and grImport2. Both sources are imported into R and saved to a <code>pdf()</code> device. In the case of grImport2, because it uses SVG as its source image it can use features that are not available in PostScript (e.g. semi-transparency).</li>
             <li>We can also use gridSVG to render images imported by grImport2, which allows us to use graphical features not present in R graphics. To do this, instead of rendering to the <code>pdf()</code> device, we just use the <code>gridsvg()</code> device or <code>grid.export()</code> instead.</li>
         </ul>
-        <p>Note: grImport has yet to improved to handle rectangle fills and strokes, but once this is achieved many of the images will be drawn correctly.</p>
+        <p>Note: grImport has yet to be improved to handle rectangle fills and strokes, but once this is achieved many of the images will be drawn correctly.</p>
         <h2>Notes</h2>
         <p>All images on this page are just PNG thumbnails from the source images. To view the source images, click on the thumbnail.</p>
         <p>The thumbnails for the PDF images were created by the evince-thumbnailer program. For SVG images, inkscape was used instead.</p>
@@ -49,7 +49,7 @@
             <dt>grImport</dt>
             <dd>The original SVG image, converted to PostScript, which is then imported via grImport and rendered to PDF.</dd>
             <dt>Improved grImport</dt>
-            <dd>Not yet undertaken, but grImport with support for rectangles added (via support for <code>/rectfill</code> and <code>/rectstroke</code>. This should correct the rendering of many flags.</dd>
+            <dd>Not yet undertaken, but grImport with support for rectangles added (via support for <code>/rectfill</code> and <code>/rectstroke</code>). This should correct the rendering of many flags.</dd>
             <dt>grImport2</dt>
             <dd>The Cairo SVG image imported via grImport2 and rendered to PDF. All clipping paths are based on the bounding box of the clipping path (because R can only create rectangular clipping paths).</dd>
             <dt>grImport2 + gridSVG</dt>
