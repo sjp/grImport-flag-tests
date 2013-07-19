@@ -1,0 +1,12 @@
+renderPDF <- function(infile, outfile) {
+    library(grImport)
+    rgml <- paste0(infile, ".xml")
+    PostScriptTrace(infile, rgml)
+    pdf(outfile)
+    dev.hold()
+    grid.draw(grid:::force(pictureGrob(readPicture(rgml))))
+    dev.flush()
+    dev.off()
+    unlink(rgml)
+}
+
