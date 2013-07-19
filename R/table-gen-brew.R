@@ -35,7 +35,7 @@ td <- function(x) {
 }
 
 anchor <- function(href, content) {
-    paste0('<a href="', href, '">', content, "</a>")
+    paste0('<a href="', href, '" class="th">', content, "</a>")
 }
 
 imgtag <- function(src, width = 300) {
