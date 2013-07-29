@@ -39,11 +39,12 @@ TABLE = state-table.html
 
 # Add GRIMPORT_IMPROVED_THUMBNAILS later
 all: $(TABLE) $(PS_THUMBNAILS) $(SVG_THUMBNAILS) $(CAIRO_SVG_THUMBNAILS) \
-	 $(GRIMPORT_FILES) $(GRIMPORT_THUMBNAILS) \
+	 $(GRIMPORT_THUMBNAILS) \
+	 $(GRIMPORT_IMPROVED_FILES) $(GRIMPORT_IMPROVED_THUMBNAILS) \
 	 $(GRIMPORT2_FILES) $(GRIMPORT2_THUMBNAILS) \
 	 $(GRIMPORT2_GRIDSVG_FILES) $(GRIMPORT2_GRIDSVG_THUMBNAILS) $(TABLE)
 	@echo "**"
-	@echo "** Page built"
+	@echo "** Page built: $(TABLE)"
 	@echo "**"
 
 # Initial thumbnails
@@ -91,7 +92,7 @@ outdirs:
 
 clean:
 	@-rm -rf state-table.html ps-thumbs svg-thumbs cairosvg-thumbs \
-		grImport grImport-thumbs \
+		grImport-thumbs \
 		grImport-improved grImport-improved-thumbs \
 		grImport2 grImport2-thumbs \
 		grImport2-gridSVG grImport2-gridSVG-thumbs

@@ -8,5 +8,12 @@ renderPDF <- function(infile, outfile) {
     dev.flush()
     dev.off()
     unlink(rgml)
+    unlink(paste0("capture",
+                  substring(outfile,
+                            nchar("grImport-improved/") + 1,
+                            nchar(outfile) - 3),
+                  "ps"))
+
+
 }
 
