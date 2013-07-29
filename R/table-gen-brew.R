@@ -16,7 +16,7 @@ NebraskaNotes <- paste(
 'the flag appears fine with the radial gradients omitted.')
 
 SouthCarolinaNotes <- paste(
-    'grImport imports and renders correctly, but this is a white',
+    'grImport imports and renders this flag, but this is a white',
     'foreground on a non-existent blue background. Therefore this',
     'appears as white on white.')
 
