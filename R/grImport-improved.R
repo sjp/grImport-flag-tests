@@ -4,7 +4,7 @@ renderPDF <- function(infile, outfile) {
     PostScriptTrace(infile, rgml)
     pdf(outfile)
     dev.hold()
-    grid.draw(grid:::force(pictureGrob(readPicture(rgml))))
+    grid.draw(grid:::force(pictureGrob(readPicture(rgml), exp = 0)))
     dev.flush()
     dev.off()
     unlink(rgml)

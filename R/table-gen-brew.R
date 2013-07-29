@@ -15,8 +15,10 @@ NebraskaNotes <- paste(
 'is negligible. gridSVG does use the gradients and exports them but',
 'the flag appears fine with the radial gradients omitted.')
 
-NevadaNotes <- SouthCarolinaNotes <-
-    "grImport fails to import and render this flag."
+SouthCarolinaNotes <- paste(
+    'grImport imports and renders correctly, but this is a white',
+    'foreground on a non-existent blue background. Therefore this',
+    'appears as white on white.')
 
 indent <- "        "
 
@@ -74,7 +76,6 @@ allStateRows <- sapply(stateNames, function(state) {
                Georgia = GeorgiaNotes,
                Kansas = KansasNotes,
                Nebraska = NebraskaNotes,
-               Nevada = NevadaNotes,
                Ohio = OhioNotes,
                "South Carolina" = SouthCarolinaNotes,
                "")
