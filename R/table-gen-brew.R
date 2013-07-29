@@ -10,7 +10,7 @@ GeorgiaNotes <- OhioNotes <- "Features a non-rectangular clipping path."
 KansasNotes <-
     "Features many linear gradients that comprise the centre of the flag."
 
-NebraskaNotes <- paste(
+NevadaNotes <- paste(
 'Features radial gradients, but they are so small that their effect',
 'is negligible. gridSVG does use the gradients and exports them but',
 'the flag appears fine with the radial gradients omitted.')
@@ -75,7 +75,7 @@ allStateRows <- sapply(stateNames, function(state) {
                Arizona = ArizonaNotes,
                Georgia = GeorgiaNotes,
                Kansas = KansasNotes,
-               Nebraska = NebraskaNotes,
+               Nevada = NevadaNotes,
                Ohio = OhioNotes,
                "South Carolina" = SouthCarolinaNotes,
                "")

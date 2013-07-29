@@ -84,7 +84,7 @@ grImport2-gridSVG-thumbs/%.png: grImport2-gridSVG/%.svg
 	@inkscape -z -e $@ -C -w 300 $<
 
 # Finally create the table that shows off all of these things
-state-table.html: R/state-table-template.Rhtml
+state-table.html: R/state-table-template.Rhtml R/table-gen-brew.R
 	@R -e "source('R/table-gen-brew.R') ; library(brew) ; brew('$<', '$@')"
 
 outdirs:
