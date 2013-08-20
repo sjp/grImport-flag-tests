@@ -106,8 +106,10 @@ state-table.html: R/state-table-template.Rhtml R/table-gen-brew.R
 outdirs:
 	@-mkdir -p $(OUTDIRS)
 
-compress:
-	@find . -name *.png -exec optipng -o7 {} \;
+compress: all
+	@optipng -o7 $(SVG_THUMBNAILS) $(PS_THUMBNAILS) $(CAIRO_SVG_THUMBNAILS) \
+	   	$(GRIMPORT_THUMBNAILS) $(GRIMPORT_IMPROVED_THUMBNAILS) \
+		$(GRIMPORT2_THUMBNAILS) $(GRIMPORT2_GRIDSVG_THUMBNAILS)
 
 clean:
 	@-rm -rf state-table.html ps-thumbs svg-thumbs cairosvg-thumbs \
@@ -116,4 +118,4 @@ clean:
 		grImport2 grImport2-thumbs \
 		grImport2-gridSVG grImport2-gridSVG-thumbs
 
-.PHONY: all clean outdirs
+.PHONY: all clean outdirs compress
