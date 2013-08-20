@@ -3,7 +3,7 @@ renderPDF <- function(infile, outfile) {
     pic <- readPicture(infile)
     pdf(outfile)
     dev.hold()
-    grid.draw(grid:::force(grobify(pic, clip = "bbox")))
+    grid.picture(pic, clip = "bbox")
     dev.flush()
     dev.off()
 }
