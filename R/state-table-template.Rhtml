@@ -10,32 +10,34 @@
         <h2>Pre-requisites</h2>
         <ul>
             <li>R (&gt;= 3.0)</li>
-            <li>grImport, available on CRAN</li>
-            <li>grImport2, available on GitHub: <a href="https://github.com/sjp/grImport2">https://github.com/sjp/grImport2</a></li>
+            <li>grConvert, available on R-Forge (recommended): <a href="https://r-forge.r-project.org/projects/grimport/">https://r-forge.r-project.org/projects/grimport/</a> and on GitHub: <a href="https://github.com/sjp/grConvert">https://github.com/sjp/grConvert</a></li>
+            <li>grImport, available on CRAN (not required anymore as it is only used for comparison purposes)</li>
+            <li>grImport, an improved version which is hosted on R-Forge: <a href="https://r-forge.r-project.org/projects/grimport/">https://r-forge.r-project.org/projects/grimport/</a></li>
+            <li>grImport2, available on R-Forge: <a href="https://r-forge.r-project.org/projects/grimport/">https://r-forge.r-project.org/projects/grimport/</a></li>
             <li>gridSVG (&gt;= 1.3), available on R-forge: <a href="http://r-forge.r-project.org/R/?group_id=1025">http://r-forge.r-project.org/R/?group_id=1025</a></li>
-            <li>SVG Flags Test Set, available on GitHub: <a href="https://github.com/sjp/grImport-flag-tests">https://github.com/sjp/grImport-flag-tests</a>. To run the tests you will need the brew package. Execute the following command to run the tests: <code>make outdirs &amp;&amp; make -j 2</code></li>
+            <li>SVG Flags Test Suite, available on GitHub: <a href="https://github.com/sjp/grImport-flag-tests">https://github.com/sjp/grImport-flag-tests</a>. To run the tests you will need the brew package. Execute the following command to run the tests: <code>make outdirs &amp;&amp; make -j 2</code></li>
         </ul>
         <h2>Method</h2>
         <ul>
             <li>We would like to plot each of the 50 state flags in R. SVG flags of the 50 states were downloaded from Wikimedia.</li>
-            <li>These flags were then converted to PostScript and SVG via Cairo. librsvg was used to read in the SVG image, which is then rendered to the appropriate output format by Cairo. Code to perform these conversions are available for <a href="https://r-forge.r-project.org/scm/viewvc.php/pkg/directlabels/etc/flags/svg2ps.py?view=markup&revision=644&root=directlabels">PostScript</a> and also for <a href="https://github.com/sjp/grImport2/tree/master/cairo/svg">SVG</a>.</li>
+            <li>These flags were then converted to PostScript and SVG via Cairo. This is performed entirely using the <code>convertPicture()</code> function in the grConvert package. librsvg was used to read in the SVG image, which is then rendered to the appropriate output format by Cairo.</li>
             <li>Once the source images have been converted, they are now available for rendering via grImport and grImport2. Both sources are imported into R and saved to a <code>pdf()</code> device. In the case of grImport2, because it uses SVG as its source image it can use features that are not available in PostScript (e.g. semi-transparency).</li>
             <li>We can also use gridSVG to render images imported by grImport2, which allows us to use graphical features not present in R graphics. To do this, instead of rendering to the <code>pdf()</code> device, we just use the <code>gridsvg()</code> device or <code>grid.export()</code> instead.</li>
         </ul>
-        <p>Note: grImport has yet to be improved to handle rectangle fills and strokes, but once this is achieved many of the images will be drawn correctly.</p>
+        <p>grImport has been improved to handle rectangle fills and strokes, given this improvement many of the images are now drawn correctly. In addition, the line endings, line join and line mitre properties of strokes are now respected.</p>
         <h2>Notes</h2>
         <p>All images on this page are just PNG thumbnails from the source images. To view the source images, click on the thumbnail.</p>
         <p>The thumbnails for the PDF images were created by the evince-thumbnailer program. For SVG images, inkscape was used instead.</p>
         <p>Thumbnails created by evince-thumbnailer appear to exaggerate the strokes on images slightly, so the thumbnails may appear to be slightly incorrect in comparison to the source image (at least for the grImport and grImport2 columns).</p>
         <h2>Further Work</h2>
         <ul>
-            <li>grImport: Support for rectangles.</li>
-            <li>grImport2: More complete support for importing images such as those featuring patterns, masks, rasters and filters. Partial support is already available for rasters and patterns but this has not yet been tested thoroughly.</li>
-            <li>grImport2: Polishing the high-level interface for using pictures.</li>
-            <li>grImport2: Add support for converting images to Cairo SVG. There is currently R code to perform this task, but it not yet calling C code to actually do the required work.</li>
-            <li>grImport2: Package documentation.</li>
-            <li>grImport2: Test with other image sources, such as PDF and PostScript.</li>
-            <li>grImport2: Attempt to get grImport2 building only multiple platforms (probably requires Autotools at some point).</li>
+            <li><strong>DONE</strong> grImport: Support for rectangles.</li>
+            <li><strong>DONE</strong> grImport2: More complete support for importing images such as those featuring patterns, masks, rasters and filters. Partial support is already available for rasters and patterns but this has not yet been tested thoroughly.</li>
+            <li>grImport2: Polishing the high-level interface for using pictures. <em>Just need to ensure that symbols work correctly (not just individual pictures).</em></li>
+            <li><strong>DONE</strong> grImport2: Add support for converting images to Cairo SVG. There is currently R code to perform this task, but it not yet calling C code to actually do the required work. <em>There is now a grConvert package which converts pictures into Cairo SVG for use with grImport and grImport2.</em></li>
+            <li><strong>DONE</strong> grImport2: Package documentation.</li>
+            <li><strong>DONE</strong> grImport2: Test with other image sources, such as PDF and PostScript.</li>
+            <li>grImport2: Attempt to get grImport2 building only multiple platforms (probably requires Autotools at some point). <em>This is almost done. We have a way of neatly distributing the grConvert package for use in Linux, but installing on OSX and Windows may be more problematic. grConvert is not strictly necessary for using grImport2 so grImport2 still works.</em></li>
         </ul>
         <h2>Known Limitations</h2>
         <p>Some images cannot be parsed correctly from their SVG form because of the SVG attribute "stroke-dasharray". R's equivalent, "lty" is too restrictive because instead of allowing any non-negative value, it only allows values between 0x1 and 0xF (1 and 15). Furthermore, it only allows a maximum of 8 values, whereas "stroke-dasharray" is does not feature this limitation. This limitation cannot (reasonably) be worked around in R but the image could be "flattened" using other software (and then read in again as Cairo SVG).</p>
@@ -44,23 +46,20 @@
         <dl>
             <dt>SVG</dt>
             <dd>The original SVG image taken from Wikimedia.</dd>
-            <dt>Cairo SVG</dt>
-            <dd>The original SVG image, after conversion from SVG to Cairo SVG.</dd>
             <dt>grImport</dt>
-            <dd>The original SVG image, converted to PostScript, which is then imported via grImport and rendered to PDF.</dd>
+            <dd>The original SVG image, converted to PostScript via grConvert, which is then imported via grImport and rendered to PDF.</dd>
             <dt>Improved grImport</dt>
-            <dd>Not yet undertaken, but grImport with support for rectangles added (via support for <code>/rectfill</code> and <code>/rectstroke</code>). This should correct the rendering of many flags.</dd>
+            <dd>grImport with support for rectangles added (via support for <code>/rectfill</code> and <code>/rectstroke</code>). This corrects the rendering of many flags. Additionally, there is now support for more line properties: line endings, line joins, and line mitres.</dd>
             <dt>grImport2</dt>
-            <dd>The Cairo SVG image imported via grImport2 and rendered to PDF. All clipping paths are based on the bounding box of the clipping path (because R can only create rectangular clipping paths).</dd>
+            <dd>The SVG image, converted to Cairo SVG via grConvert, then imported via grImport2 and rendered to PDF. All clipping paths are based on the bounding box of the clipping path (because R can only create rectangular clipping paths).</dd>
             <dt>grImport2 + gridSVG</dt>
-            <dd>The Cairo SVG image imported via grImport2 and rendered back to SVG via gridSVG. This means we can use the necessary features to render the flags correctly, which are gradients and (non-rectangular) clipping paths.</dd>
+            <dd>The SVG image, converted to Cairo SVG via grConvert, then imported via grImport2 and rendered back to SVG via gridSVG. This means we can use the necessary features to render the flags correctly, which are gradients and (non-rectangular) clipping paths.</dd>
         </dl>
         <table>
             <thead>
                 <tr>
                     <td>State</td>
                     <td>SVG</td>
-                    <td>Cairo SVG</td>
                     <td>grImport</td>
                     <td>Improved grImport</td>
                     <td>grImport2</td>

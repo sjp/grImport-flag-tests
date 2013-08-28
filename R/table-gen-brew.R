@@ -83,8 +83,6 @@ allStateRows <- sapply(stateNames, function(state) {
     tr(paste0(textCell(state),
            imgCell(file.path("svg", paste0(statefn, ".svg")),
                    file.path("svg-thumbs", paste0(statefn, ".png"))),
-           imgCell(file.path("cairosvg", paste0(statefn, ".svg")),
-                   file.path("cairosvg-thumbs", paste0(statefn, ".png"))),
            imgCell(file.path("grImport", paste0(statefn, ".pdf")),
                    file.path("grImport-thumbs", paste0(statefn, ".png"))),
            imgCell(file.path("grImport-improved", paste0(statefn, ".pdf")),
