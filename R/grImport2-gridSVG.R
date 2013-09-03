@@ -3,8 +3,7 @@ renderSVG <- function(infile, outfile) {
     pdf(file = NULL)
     gridSVG.newpage()
     pic <- readPicture(infile)
-    grid.picture(pic, clip = "gridSVG", gridSVG = TRUE)
-    grid.force()
+    grid.picture(pic, expansion = 0, clip = "gridSVG", gridSVG = TRUE)
     grid.export(outfile)
     dev.off()
 }
