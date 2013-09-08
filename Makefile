@@ -39,14 +39,17 @@ GRIMPORT2_GRIDSVG_THUMBNAILS = $(addprefix grImport2-gridSVG-thumbs/, \
 # Also need to generate a final table
 TABLE = state-table.html
 
-# Add GRIMPORT_IMPROVED_THUMBNAILS later
-all: $(TABLE) $(SVG_THUMBNAILS) \
-	 $(PS_FILES) $(PS_THUMBNAILS) \
-	 $(CAIRO_SVG_FILES) $(CAIRO_SVG_THUMBNAILS) \
-	 $(GRIMPORT_THUMBNAILS) \
-	 $(GRIMPORT_IMPROVED_FILES) $(GRIMPORT_IMPROVED_THUMBNAILS) \
-	 $(GRIMPORT2_FILES) $(GRIMPORT2_THUMBNAILS) \
-	 $(GRIMPORT2_GRIDSVG_FILES) $(GRIMPORT2_GRIDSVG_THUMBNAILS) $(TABLE)
+# Double colon for explicit ordering of rules
+# i.e. dirs are always present before the page is generated
+all:: outdirs page 
+
+page: $(TABLE) $(SVG_THUMBNAILS) \
+	  $(PS_FILES) $(PS_THUMBNAILS) \
+	  $(CAIRO_SVG_FILES) $(CAIRO_SVG_THUMBNAILS) \
+	  $(GRIMPORT_THUMBNAILS) \
+	  $(GRIMPORT_IMPROVED_FILES) $(GRIMPORT_IMPROVED_THUMBNAILS) \
+	  $(GRIMPORT2_FILES) $(GRIMPORT2_THUMBNAILS) \
+	  $(GRIMPORT2_GRIDSVG_FILES) $(GRIMPORT2_GRIDSVG_THUMBNAILS)
 	@echo "**"
 	@echo "** Page built: $(TABLE)"
 	@echo "**"
@@ -118,4 +121,4 @@ clean:
 		grImport2 grImport2-thumbs \
 		grImport2-gridSVG grImport2-gridSVG-thumbs
 
-.PHONY: all clean outdirs compress
+.PHONY: all clean outdirs compress page
