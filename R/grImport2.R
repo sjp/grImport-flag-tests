@@ -3,7 +3,7 @@ renderPDF <- function(infile, outfile) {
     pic <- readPicture(infile)
     pdf(outfile)
     dev.hold()
-    grid.picture(pic, expansion = 0, clip = "bbox")
+    grid.picture(pic, expansion = 0, ext = "clipbbox")
     dev.flush()
     dev.off()
 }
